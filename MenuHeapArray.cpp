@@ -149,7 +149,7 @@ void functionHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr) {
             key = getNumberInput<int>();
 
             newheap = Arr->GetElement(indexOfHeap1);
-            newheap.DeleteElement(key);
+            newheap.DeleteElementByKey(key);
             Arr->Append(newheap);
             break;
         case 4:
@@ -248,7 +248,7 @@ void functionComplex(DynamicArray<HeapArray<complex<int>>> *Arr) {
             key = getNumberInput<int>();
 
             newheap = Arr->GetElement(indexOfHeap1);
-            newheap.DeleteElement(key);
+            newheap.DeleteElementByKey(key);
             Arr->Append(newheap);
             break;
         case 4:

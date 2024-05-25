@@ -5,7 +5,8 @@
 #include "Test_BinaryTree.h"
 
 void testBinaryTreeFunctions() {
-    vector<int> sizes = {10000, 100000, 1000000, 10000000};
+    std::ofstream outputFile("test.txt");
+    vector<int> sizes = {10000, 50000, 100000, 150000, 1000000, 1500000, 10000000};
     vector<double> insertionTimes;
     vector<double> searchTimes;
     for (int size: sizes) {
@@ -22,7 +23,20 @@ void testBinaryTreeFunctions() {
         searchTimes.push_back(searchtime);
         cout << "Size: " << size << ", Time of insertion: " << insertionTime << "s, Search time: " << searchtime
              << "s\n";
+        outputFile << size << ", ";
     }
+    outputFile << "\n";
+
+    for (double insertionTime: insertionTimes) {
+        outputFile << insertionTime << ", ";
+    }
+    outputFile << "\n";
+
+    for (double searchTime: searchTimes) {
+        outputFile << searchTime << ", ";
+    }
+
+    outputFile.close();
 }
 
 void testContainElement() {
@@ -224,7 +238,7 @@ void testWhereFunction() {
 
 
 void testBinaryTree() {
-    //testBinaryTreeFunctions();
+    testBinaryTreeFunctions();
     testContainElement();
     testGetTree();
     testIsTree();

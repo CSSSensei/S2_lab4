@@ -15,4 +15,5 @@ void menu(){
         MenuHeapArray();
     else
         testBinaryTree();
+        testHeapArray();
 }

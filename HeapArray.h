@@ -118,7 +118,7 @@ public:
         }
     }
 
-    void DeleteElement(int key) {
+    void DeleteElementByKey(int key) {
         if (key >= HeapSize || key < 0) {
             throw IndexOutOfRange();
         }
@@ -133,6 +133,33 @@ public:
             for (int k = 0; k < HeapSize; k++) {
                 MaxHeapify(k);
             }
+        }
+    }
+
+    void DeleteElement(const T value) {
+        if (!SearchElement(value)) {
+            return;
+        }
+        auto toDelete = new bool[HeapSize];
+        for (int i = 0; i < HeapSize; ++i) {
+            if (heap[i] == value) {
+                toDelete[i] = true;
+            }
+            toDelete[i] = false;
+        }
+        int j = 0;
+        for (int i = 0; i < HeapSize; ++i) {
+            if (!toDelete[i]) {
+                heap[j] = heap[i];
+                j++;
+            }
+        }
+
+        HeapSize--;
+        delete[] toDelete;
+
+        for (int i = 0; i < HeapSize; ++i) {
+            MaxHeapify(i);
         }
     }
 

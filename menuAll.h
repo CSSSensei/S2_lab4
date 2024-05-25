@@ -3,6 +3,7 @@
 #include "MenuHeapArray.h"
 #include "MenuBinaryTree.h"
 #include "Tests/Test_BinaryTree.h"
+#include "Tests/Test_HeapArray.h"
 
 void menu();
 
