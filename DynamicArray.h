@@ -105,12 +105,26 @@ public:
     int GetFilled(){
         return filled;
     }
-    T GetElement(int index){
+
+    T GetElement(int index) {
         return array[index];
     }
 
+    DynamicArray<T> Concat(const DynamicArray<T> &otherArray) {
+        DynamicArray<T> result;
+        result.Resize(filled + otherArray.filled);
 
-    DynamicArray<T> &operator = (DynamicArray<T> dynamicArray) {
+        for (int i = 0; i < filled; i++) {
+            result.Append(array[i]);
+        }
+
+        for (int i = 0; i < otherArray.filled; i++) {
+            result.Append(otherArray.array[i]);
+        }
+        return result;
+    }
+
+    DynamicArray<T> &operator=(DynamicArray<T> dynamicArray) {
         Resize(dynamicArray.GetSize());
         size = dynamicArray.GetSize();
         filled = dynamicArray.GetFilled();
@@ -128,6 +142,14 @@ public:
             array[i] = dynamicArray->array[i];
         }
         return *this;
+    }
+
+    T &operator[](int index) {
+        if (index < 0 || index >= filled) {
+            throw IndexOutOfRange();
+        }
+
+        return array[index];
     }
 };
 

@@ -1,42 +1,95 @@
+#include <limits>
 #include "MenuHeapArray.h"
+#include <complex>
 
-int chooseTypeHeapArray(){
+template<typename T>
+T getNumberInput() {
+    T value;
+    while (true) {
+        std::cin >> value;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::wcout << L"Неверный тип данных.\n";
+        } else {
+            break;
+        }
+    }
+    return value;
+}
+
+std::complex<int> getComplexNumberInput() {
+    std::complex<int> value;
+    int real, imaginary;
+
+    std::cout << "Enter real part:";
+    real = getNumberInput<int>();
+
+    std::cout << "Enter imaginary part:";
+    imaginary = getNumberInput<int>();
+
+    value = std::complex<int>(real, imaginary);
+    return value;
+}
+
+
+int chooseTypeHeapArray() {
     int type;
-    cout << "Выберете тип, с которым будете работать: \n"
-         << "\t1: int\n"
-         << "\t2: float\n"
-         << "\t3: complex\n"
-         << "Введите число: ";
-    cin >> type;
+    wcout << L"Выберете тип, с которым будете работать: \n"
+          << L"\t1: int\n"
+          << L"\t2: float\n"
+          << L"\t3: complex\n"
+          << L"Введите число:";
+    type = getNumberInput<int>();
 
     return type;
 }
-int chooseFunctionHeapArray(){
+
+int chooseFunctionHeapArray() {
     int func;
-    cout << "Выберете функцию, которую нужно произвести над бинарной кучей: \n"
-         << "\t1: Добавление узла\n"
-         << "\t2: Поиск элемента по ключу\n"
-         << "\t3: Удаление узла\n"
-         << "\t4: Извлечение поддерева\n"
-         << "\t5: Поиск на вхождение поддерева\n"
-         << "Введите число: ";
-    cin >> func;
+    wcout << L"Выберете функцию, которую нужно произвести над бинарной кучей: \n"
+          << L"\t1: Добавление узла\n"
+          << L"\t2: Поиск элемента по ключу\n"
+          << L"\t3: Удаление узла\n"
+          << L"\t4: Извлечение поддерева\n"
+          << L"\t5: Поиск на вхождение поддерева\n"
+          << L"Введите число:";
+    func = getNumberInput<int>();
 
     return func;
 }
 
 template<class T>
-void inputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr){
+void inputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr) {
     HeapArray<T> addingHeap;
 
-    cout << "Введите колличество узлов в куче" << endl;
+    wcout << L"Введите колличество узлов в куче" << endl;
     int count;
-    cin >> count;
+    count = getNumberInput<int>();
 
-    for (int i = 0; i < count; i++){
-        int item;
-        cout << "Введите значение добавляемого \"" << i << "\" узла кучи" << endl;
-        cin >> item;
+    for (int i = 0; i < count; i++) {
+        T item;
+        wcout << L"Введите значение добавляемого \"" << i << L"\" узла кучи" << endl;
+        item = getNumberInput<T>();
+
+        addingHeap.AddElement(item);
+    }
+
+    Arr->Append(addingHeap);
+}
+
+
+void inputComplexArrayTyped(DynamicArray<HeapArray<complex<int>>> *Arr) {
+    HeapArray<complex<int>> addingHeap;
+
+    wcout << L"Введите колличество узлов в куче" << endl;
+    int count;
+    count = getNumberInput<int>();
+
+    for (int i = 0; i < count; i++) {
+        complex<int> item;
+        wcout << L"Введите значение добавляемого \"" << i << L"\" узла кучи" << endl;
+        item = getComplexNumberInput();
 
         addingHeap.AddElement(item);
     }
@@ -45,63 +98,63 @@ void inputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr){
 }
 
 template<class T>
-void functionHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr){
+void functionHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr) {
     int function = chooseFunctionHeapArray();
-    int amountOfHeapArray = Arr->GetFilled();
-    int indexOfHeap1 = -1;
-    int indexOfHeap2 = -1;
+    int amountOfHeapArray = Arr->GetFilled(), indexOfHeap1 = -1, indexOfHeap2 = -1;
 
-    if (function == 5){
-        cout << "В памяти находится \"" << amountOfHeapArray << "\" куч" << endl;
-        cout << "Выберете индекс кучи, которую хотите проверить на вхождение:" << endl;
-        cin >> indexOfHeap1;
-        cout << "Выберете индекс кучи, вхождение которой нужно проверять:" << endl;
-        cin >> indexOfHeap2;
-        if (indexOfHeap1 >= amountOfHeapArray || indexOfHeap1 < 0 || indexOfHeap2 >= amountOfHeapArray|| indexOfHeap2 < 0){
-            cout << "Кучи с таким индексом нет в памяти!!!" << endl;
+    if (function == 5) {
+        wcout << L"В памяти находится \"" << amountOfHeapArray << L"\" куч" << endl;
+        wcout << L"Выберете индекс кучи, которую хотите проверить на вхождение:" << endl;
+        indexOfHeap1 = getNumberInput<int>();
+        wcout << L"Выберете индекс кучи, вхождение которой нужно проверять:" << endl;
+        indexOfHeap2 = getNumberInput<int>();
+        if (indexOfHeap1 >= amountOfHeapArray || indexOfHeap1 < 0 || indexOfHeap2 >= amountOfHeapArray ||
+            indexOfHeap2 < 0) {
+            wcout << L"Кучи с таким индексом нет в памяти!!!" << endl;
             function = -1;
         }
-    }else{
-        cout << "В памяти находится \"" << amountOfHeapArray << "\" куч" << endl;
-        cout << "Выберете индекс кучи, с которой хотите работать:" << endl;
-        cin >> indexOfHeap1;
-        if (indexOfHeap1 >= amountOfHeapArray || indexOfHeap1 < 0){
-            cout << "Кучи с таким индексом нет в памяти!!!" << endl;
+    } else {
+        wcout << L"В памяти находится \"" << amountOfHeapArray << L"\" куч" << endl;
+        wcout << L"Выберете индекс кучи, с которой хотите работать:" << endl;
+        indexOfHeap1 = getNumberInput<int>();
+        if (indexOfHeap1 >= amountOfHeapArray || indexOfHeap1 < 0) {
+            wcout << L"Кучи с таким индексом нет в памяти!!!" << endl;
             function = -1;
         }
     }
 
-    int bol, key;
+    int key;
+    bool flag;
     T item;
     HeapArray<T> newheap, newheap2;
 
 
     switch (function) {
         case 1:
-            cout << "Введите значение добавляемого узла кучи" << endl;
-            cin >> item;
+            wcout << L"Введите значение добавляемого узла кучи" << endl;
+            item = getNumberInput<T>();
 
             newheap = Arr->GetElement(indexOfHeap1);
             newheap.AddElement(item);
             Arr->Append(newheap);
             break;
         case 2:
-            cout << "Введите индекс узла кучи, по которому хотите искать:" << endl;
-            cin >> key;
+            wcout << L"Введите индекс узла кучи, по которому хотите искать:" << endl;
+            key = getNumberInput<int>();
             item = Arr->GetElement(indexOfHeap1).FindElement(key);
-            cout << "В узле с таким индексом лежит - \"" << item << "\"" << endl;
+            wcout << L"В узле с таким индексом лежит - \"" << item << L"\"" << endl;
             break;
         case 3:
-            cout << "Введите индекс узла кучи, который хотите удалить:" << endl;
-            cin >> key;
+            wcout << L"Введите индекс узла кучи, который хотите удалить:" << endl;
+            key = getNumberInput<int>();
 
             newheap = Arr->GetElement(indexOfHeap1);
             newheap.DeleteElement(key);
             Arr->Append(newheap);
             break;
         case 4:
-            cout << "Введите значение узла кучи, который будет являться корнем извлекаемой кучи:" << endl;
-            cin >> item;
+            wcout << L"Введите значение узла кучи, который будет являться корнем извлекаемой кучи:" << endl;
+            item = getNumberInput<T>();
 
             Arr->Append(*(Arr->GetElement(indexOfHeap1).GetTree(item)));
             break;
@@ -109,28 +162,127 @@ void functionHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr){
             newheap = Arr->GetElement(indexOfHeap1);
             newheap2 = Arr->GetElement(indexOfHeap2);
 
-            bol = newheap.ContainTree(newheap2);
+            flag = newheap.ContainTree(newheap2);
 
-            if (bol == 1)
-                cout << "Эта куча ЯВЛЯЕТСЯ поддеревом исходноой кучи!!!" << endl;
+            if (flag)
+                wcout << L"Эта куча ЯВЛЯЕТСЯ поддеревом исходноой кучи!!!" << endl;
             else
-                cout << "Эта куча НЕ ЯВЛЯЕТСЯ поддеревом исходной кучи!!!" << endl;
+                wcout << L"Эта куча НЕ ЯВЛЯЕТСЯ поддеревом исходной кучи!!!" << endl;
             break;
         default:
             break;
     }
 
-    if (function == 1 || function == 3 || function == 4){
+    if (function == 1 || function == 3 || function == 4) {
         HeapArray<T> resultheap = Arr->GetElement(Arr->GetFilled() - 1);
 
         int variant;
-        cout << "Выберете тип вывода кучи: \n"
-             << "\t1: Как массив\n"
-             << "\t2: Как дерево\n"
-             << "Введите число: ";
-        cin >> variant;
+        wcout << L"Выберете тип вывода кучи: \n"
+              << L"\t1: Как массив\n"
+              << L"\t2: Как дерево\n"
+              << L"Введите число:";
+        variant = getNumberInput<int>();
 
-        switch (variant){
+        switch (variant) {
+            case 1:
+                PrintHeapArrayMassive(resultheap);
+                break;
+            case 2:
+                PrintHeapArrayBeauty(resultheap);
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+
+void functionComplex(DynamicArray<HeapArray<complex<int>>> *Arr) {
+    int function = chooseFunctionHeapArray();
+    int amountOfHeapArray = Arr->GetFilled(), indexOfHeap1 = -1, indexOfHeap2 = -1;
+
+    if (function == 5) {
+        wcout << L"В памяти находится \"" << amountOfHeapArray << L"\" куч" << endl;
+        wcout << L"Выберете индекс кучи, которую хотите проверить на вхождение:" << endl;
+        indexOfHeap1 = getNumberInput<int>();
+        wcout << L"Выберете индекс кучи, вхождение которой нужно проверять:" << endl;
+        indexOfHeap2 = getNumberInput<int>();
+        if (indexOfHeap1 >= amountOfHeapArray || indexOfHeap1 < 0 || indexOfHeap2 >= amountOfHeapArray ||
+            indexOfHeap2 < 0) {
+            wcout << L"Кучи с таким индексом нет в памяти!!!" << endl;
+            function = -1;
+        }
+    } else {
+        wcout << L"В памяти находится \"" << amountOfHeapArray << L"\" куч" << endl;
+        wcout << L"Выберете индекс кучи, с которой хотите работать:" << endl;
+        indexOfHeap1 = getNumberInput<int>();
+        if (indexOfHeap1 >= amountOfHeapArray || indexOfHeap1 < 0) {
+            wcout << L"Кучи с таким индексом нет в памяти!!!" << endl;
+            function = -1;
+        }
+    }
+
+    int key;
+    bool flag;
+    complex<int> item;
+    HeapArray<complex<int>> newheap, newheap2;
+
+
+    switch (function) {
+        case 1:
+            wcout << L"Введите значение добавляемого узла кучи" << endl;
+            item = getComplexNumberInput();
+
+            newheap = Arr->GetElement(indexOfHeap1);
+            newheap.AddElement(item);
+            Arr->Append(newheap);
+            break;
+        case 2:
+            wcout << L"Введите индекс узла кучи, по которому хотите искать:" << endl;
+            key = getNumberInput<int>();
+            item = Arr->GetElement(indexOfHeap1).FindElement(key);
+            wcout << L"В узле с таким индексом лежит - \"" << item << L"\"" << endl;
+            break;
+        case 3:
+            wcout << L"Введите индекс узла кучи, который хотите удалить:" << endl;
+            key = getNumberInput<int>();
+
+            newheap = Arr->GetElement(indexOfHeap1);
+            newheap.DeleteElement(key);
+            Arr->Append(newheap);
+            break;
+        case 4:
+            wcout << L"Введите значение узла кучи, который будет являться корнем извлекаемой кучи:" << endl;
+            item = getComplexNumberInput();
+
+            Arr->Append(*(Arr->GetElement(indexOfHeap1).GetTree(item)));
+            break;
+        case 5:
+            newheap = Arr->GetElement(indexOfHeap1);
+            newheap2 = Arr->GetElement(indexOfHeap2);
+
+            flag = newheap.ContainTree(newheap2);
+
+            if (flag)
+                wcout << L"Эта куча ЯВЛЯЕТСЯ поддеревом исходноой кучи!!!" << endl;
+            else
+                wcout << L"Эта куча НЕ ЯВЛЯЕТСЯ поддеревом исходной кучи!!!" << endl;
+            break;
+        default:
+            break;
+    }
+
+    if (function == 1 || function == 3 || function == 4) {
+        HeapArray<complex<int>> resultheap = Arr->GetElement(Arr->GetFilled() - 1);
+
+        int variant;
+        wcout << L"Выберете тип вывода кучи: \n"
+              << L"\t1: Как массив\n"
+              << L"\t2: Как дерево\n"
+              << L"Введите число:";
+        variant = getNumberInput<int>();
+
+        switch (variant) {
             case 1:
                 PrintHeapArrayMassive(resultheap);
                 break;
@@ -144,19 +296,20 @@ void functionHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr){
 
 }
 
+
 template<class T>
-void outputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr){
+void outputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr) {
     int amountOfHeapArray = Arr->GetFilled();
     int index, variant;
-    cout << "В памяти находится \"" << amountOfHeapArray << "\" куч" << endl;
-    cout << "Выберете индекс кучи, которую хотите вывести" << endl;
-    cin >> index;
+    wcout << L"В памяти находится \"" << amountOfHeapArray << L"\" куч" << endl;
+    wcout << L"Выберете индекс кучи, которую хотите вывести" << endl;
+    index = getNumberInput<int>();
 
-    cout << "Выберете тип вывода кучи: \n"
-         << "\t1: Как массив\n"
-         << "\t2: Как дерево\n"
-         << "Введите число: ";
-    cin >> variant;
+    wcout << L"Выберете тип вывода кучи: \n"
+          << L"\t1: Как массив\n"
+          << L"\t2: Как дерево\n"
+          << L"Введите число:";
+    variant = getNumberInput<int>();
 
     if (index < 0 || index >= amountOfHeapArray)
         variant = 0;
@@ -174,77 +327,105 @@ void outputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr){
 }
 
 
-void MenuHeapArray(){
+void MenuHeapArray() {
     auto *intArr = new DynamicArray<HeapArray<int>>;
     auto *floatArr = new DynamicArray<HeapArray<float>>;
     auto *complexArr = new DynamicArray<HeapArray<complex<int>>>;
 
 
     int operation;
-    while(true){
-        cout << "Выберете операцию: \n"
-             << "\t1: Ввести и запомнить бинарную кучу\n"
-             << "\t2: Выполнить операцию над кучей\n"
-             << "\t3: Вывести кучу в консоль\n"
-             << "\t4: Закончить выполнение программы\n"
-             << "Введите число: ";
-        cin >> operation;
+    while (true) {
+        wcout << L"Выберете операцию: \n"
+              << L"\t1: Ввести и запомнить бинарную кучу\n"
+              << L"\t2: Выполнить операцию над кучей\n"
+              << L"\t3: Вывести кучу в консоль\n"
+              << L"\t4: Закончить выполнение программы\n"
+              << L"Введите число:";
+        operation = getNumberInput<int>();
 
         if (operation == 4)
             break;
 
-        switch(operation){
-            case 1: InputAndSaveHeapArray(intArr, floatArr, complexArr); break;
-            case 2: FunctionWithHeapArray(intArr, floatArr, complexArr); break;
-            case 3: OutputHeapArray(intArr, floatArr, complexArr); break;
-            default: break;
+        switch (operation) {
+            case 1:
+                InputAndSaveHeapArray(intArr, floatArr, complexArr);
+                break;
+            case 2:
+                FunctionWithHeapArray(intArr, floatArr, complexArr);
+                break;
+            case 3:
+                OutputHeapArray(intArr, floatArr, complexArr);
+                break;
+            default:
+                break;
         }
     }
 }
 
 void InputAndSaveHeapArray(DynamicArray<HeapArray<int>> *intArr,
                            DynamicArray<HeapArray<float>> *floatArr,
-                           DynamicArray<HeapArray<complex<int>>> *complexArr){
+                           DynamicArray<HeapArray<complex<int>>> *complexArr) {
     int type = chooseTypeHeapArray();
 
-    switch(type){
-        case 1: inputHeapArrayTyped(intArr); break;
-        case 2: inputHeapArrayTyped(floatArr); break;
-        case 3: inputHeapArrayTyped(complexArr); break;
-        default: break;
+    switch (type) {
+        case 1:
+            inputHeapArrayTyped(intArr);
+            break;
+        case 2:
+            inputHeapArrayTyped(floatArr);
+            break;
+        case 3:
+            inputComplexArrayTyped(complexArr);
+            break;
+        default:
+            break;
     }
 }
 
 void FunctionWithHeapArray(DynamicArray<HeapArray<int>> *intArr,
                            DynamicArray<HeapArray<float>> *floatArr,
-                           DynamicArray<HeapArray<complex<int>>> *complexArr){
+                           DynamicArray<HeapArray<complex<int>>> *complexArr) {
     int type = chooseTypeHeapArray();
 
-    switch(type){
-        case 1: functionHeapArrayTyped(intArr); break;
-        case 2: functionHeapArrayTyped(floatArr); break;
-        case 3: functionHeapArrayTyped(complexArr); break;
-        default: break;
+    switch (type) {
+        case 1:
+            functionHeapArrayTyped(intArr);
+            break;
+        case 2:
+            functionHeapArrayTyped(floatArr);
+            break;
+        case 3:
+            functionComplex(complexArr);
+            break;
+        default:
+            break;
     }
 }
 
 void OutputHeapArray(DynamicArray<HeapArray<int>> *intArr,
                      DynamicArray<HeapArray<float>> *floatArr,
-                     DynamicArray<HeapArray<complex<int>>> *complexArr){
+                     DynamicArray<HeapArray<complex<int>>> *complexArr) {
     int type = chooseTypeHeapArray();
 
 
-    switch (type){
-        case 1:outputHeapArrayTyped(intArr); break;
-        case 2:outputHeapArrayTyped(floatArr); break;
-        case 3:outputHeapArrayTyped(complexArr); break;
-        default: break;
+    switch (type) {
+        case 1:
+            outputHeapArrayTyped(intArr);
+            break;
+        case 2:
+            outputHeapArrayTyped(floatArr);
+            break;
+        case 3:
+            outputHeapArrayTyped(complexArr);
+            break;
+        default:
+            break;
     }
 }
 
 template<class T>
-void PrintHeapArrayMassive(HeapArray<T> heap){
-    for (int i = 0; i < heap.GetHeapSize(); i++){
+void PrintHeapArrayMassive(HeapArray<T> heap) {
+    for (int i = 0; i < heap.GetHeapSize(); i++) {
         cout << heap.FindElement(i) << "  ";
     }
 
@@ -252,35 +433,9 @@ void PrintHeapArrayMassive(HeapArray<T> heap){
 }
 
 template<class T>
-void PrintHeapArrayBeauty(HeapArray<T> heap){
-    int levels = heap.GetLevels();
-    int levelnow = -1;
-
-    for (int i = 0; i < heap.GetHeapSize(); i++){
-        int parents = heap.GetAmountOfParent(i);
-        if (parents > levelnow){
-
-            if (levelnow == -1)
-                levelnow =parents;
-            else{
-                cout << endl;
-                levelnow = parents;
-            }
-        }
-
-        int prob = 1;
-        for (int j = 0; j < levels - parents; j++)
-            prob *= 2;
-
-        for (int k = 0; k < prob; k++)
-            cout << " ";
-
-        cout << heap.FindElement(i);
-    }
-
-    cout << endl;
+void PrintHeapArrayBeauty(HeapArray<T> heap) {
+    heap.PrintHeapVisual(heap);
 }
-
 
 
 

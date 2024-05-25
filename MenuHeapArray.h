@@ -43,15 +43,19 @@ bool operator >= (const complex<T>& a, const complex<T>& b){
     else
         return false;
 }
-
+template <class T>
+T getNumberInput();
+std::complex<int> getComplexNumberInput();
 int chooseTypeHeapArray();
 int chooseFunctionHeapArray();
 
 template<class T>
 void inputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr);
+void inputComplexArrayTyped(DynamicArray<HeapArray<complex<int>>> *Arr);
 
 template<class T>
 void functionHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr);
+void functionComplex(DynamicArray<HeapArray<complex<int>>> *Arr);
 
 template<class T>
 void outputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr);

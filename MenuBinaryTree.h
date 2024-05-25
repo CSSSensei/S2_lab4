@@ -12,6 +12,7 @@ int chooseFunctionBinaryTree();
 
 template<class T, class K>
 void inputBinaryTreeTyped(DynamicArray<BinaryTree<T, K>> *Arr);
+void inputComplexBinaryTreeTyped(DynamicArray<BinaryTree<complex<int>, int>> *Arr);
 
 template<class T, class K>
 void functionBinaryTreeTyped(DynamicArray<BinaryTree<T, K>> *Arr);
@@ -34,33 +35,37 @@ void OutputBinaryTree(DynamicArray<BinaryTree<int, int>> *intArr,
 
 template<class T, class K>
 void PrintBinaryTreeMassive(BinaryTree<T, K> tree){
-    auto root = tree.GetRoot();
-    if (root == nullptr)
-        return;
+//    auto root = tree.GetRoot();
+//    if (root == nullptr)
+//        return;
+//
+//    wcout << L"[Ключ: " << root->info.key << L" Значение: " << root->info.item << "]";
+//    BinaryTree<T, K> treeLeft (root->left);
+//    BinaryTree<T, K> treeRight (root->right);
+//    PrintBinaryTreeMassive(treeLeft);
+//    PrintBinaryTreeMassive(treeRight);
+    std::wcout << L"КЛП: ";
+    tree.Traversal_KLP_0();
+    std::wcout << L"\nКПЛ: ";
+    tree.Traversal_KPL_0();
+    std::wcout << L"\nЛКП: ";
+    tree.Traversal_LKP_0();
+    std::wcout << L"\nЛПК: ";
+    tree.Traversal_LPK_0();
+    std::wcout << L"\nПКЛ: ";
+    tree.Traversal_PKL_0();
+    std::wcout << L"\nПЛК: ";
+    tree.Traversal_PLK_0();
 
-    cout << "[Ключ: " << root->info.key << " Значение: " << root->info.item << "]";
-    BinaryTree<T, K> treeLeft (root->left);
-    BinaryTree<T, K> treeRight (root->right);
-    PrintBinaryTreeMassive(treeLeft);
-    PrintBinaryTreeMassive(treeRight);
 }
 
-template<class T, class K>
-void PrintBinaryTreeBeauty(BinaryTree<T, K> tree, int prob){
-    auto root = tree.GetRoot();
-    if (root == nullptr)
-        return;
-
-    BinaryTree<T, K> treeRight (root->right);
-    PrintBinaryTreeBeauty(treeRight, prob + 1);
-
-    for (int i = 0; i < prob; i++)
-        cout << "  ";
-    cout << root->info.key << endl;
-
-    BinaryTree<T, K> treeLeft (root->left);
-    PrintBinaryTreeBeauty(treeLeft, prob + 1);
+template <class T, class K>
+void PrintBinaryTreeBeauty(BinaryTree<T, K> tree) {
+    auto root = tree.GetRoot(); // Получаем указатель на корневой узел
+    tree.PrintTreeVisual(root);
 }
+
+
 
 template<class T>
 complex<T> &operator < (complex<T> a, complex<T> b){
