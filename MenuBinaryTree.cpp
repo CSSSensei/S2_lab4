@@ -37,7 +37,7 @@ int chooseFunctionBinaryTree() {
 }
 
 template<class T, class K>
-void inputBinaryTreeTyped(DynamicArray<BinaryTree<T, K>> *Arr) {
+void inputBinaryTreeTyped(DynamicArray<BinaryTree<T, K>>* Arr) {
 
     BinaryTree<T, K> addingTree;
     wcout << L"Введите колличество узлов в дереве" << endl;
@@ -57,7 +57,7 @@ void inputBinaryTreeTyped(DynamicArray<BinaryTree<T, K>> *Arr) {
     Arr->Append(addingTree);
 }
 
-void inputComplexBinaryTreeTyped(DynamicArray<BinaryTree<complex<int>, int>> *Arr) {
+void inputComplexBinaryTreeTyped(DynamicArray<BinaryTree<complex<int>, int>>* Arr) {
 
     BinaryTree<complex<int>, int> addingTree;
     wcout << L"Введите колличество узлов в дереве" << endl;
@@ -79,7 +79,7 @@ void inputComplexBinaryTreeTyped(DynamicArray<BinaryTree<complex<int>, int>> *Ar
 
 
 template<class T, class K>
-void functionBinaryTreeTyped(DynamicArray<BinaryTree<T, K>> *Arr) {
+void functionBinaryTreeTyped(DynamicArray<BinaryTree<T, K>>* Arr) {
     int function = chooseFunctionBinaryTree(), amountOfBinaryTree = Arr->GetFilled(), indexOfTree1 = -1, indexOfTree2 = -1;
 
     if (function == 6) {
@@ -198,8 +198,9 @@ void functionBinaryTreeTyped(DynamicArray<BinaryTree<T, K>> *Arr) {
 
 }
 
+
 template<class T, class K>
-void outputBinaryTreeTyped(DynamicArray<BinaryTree<T, K>> *Arr) {
+void outputBinaryTreeTyped(DynamicArray<BinaryTree<T, K>>* Arr) {
     int amountOfBinaryTree = Arr->GetFilled();
     int index, variant;
     wcout << L"В памяти находится \"" << amountOfBinaryTree << L"\" деревьев" << endl;
@@ -228,10 +229,9 @@ void outputBinaryTreeTyped(DynamicArray<BinaryTree<T, K>> *Arr) {
 }
 
 void MenuBinaryTree() {
-    auto *intArr = new DynamicArray<BinaryTree<int, int>>;
-    auto *floatArr = new DynamicArray<BinaryTree<float, float>>;
-    auto *complexArr = new DynamicArray<BinaryTree<complex<int>, int>>;
-
+    auto* intArr = new DynamicArray<BinaryTree<int, int>>;
+    auto* floatArr = new DynamicArray<BinaryTree<float, float>>;
+    auto* complexArr = new DynamicArray<BinaryTree<complex<int>, int>>;
 
     int operation;
     while (true) {
@@ -262,9 +262,9 @@ void MenuBinaryTree() {
     }
 }
 
-void InputAndSaveBinaryTree(DynamicArray<BinaryTree<int, int>> *intArr,
-                            DynamicArray<BinaryTree<float, float>> *floatArr,
-                            DynamicArray<BinaryTree<complex<int>, int>> *complexArr) {
+void InputAndSaveBinaryTree(DynamicArray<BinaryTree<int, int>>* intArr,
+                            DynamicArray<BinaryTree<float, float>>* floatArr,
+                            DynamicArray<BinaryTree<complex<int>, int>>* complexArr) {
     int type = chooseTypeBinaryTree();
 
     switch (type) {
@@ -282,9 +282,9 @@ void InputAndSaveBinaryTree(DynamicArray<BinaryTree<int, int>> *intArr,
     }
 }
 
-void FunctionWithBinaryTree(DynamicArray<BinaryTree<int, int>> *intArr,
-                            DynamicArray<BinaryTree<float, float>> *floatArr,
-                            DynamicArray<BinaryTree<complex<int>, int>> *complexArr) {
+void FunctionWithBinaryTree(DynamicArray<BinaryTree<int, int>>* intArr,
+                            DynamicArray<BinaryTree<float, float>>* floatArr,
+                            DynamicArray<BinaryTree<complex<int>, int>>* complexArr) {
     int type = chooseTypeBinaryTree();
 
     switch (type) {
@@ -302,9 +302,9 @@ void FunctionWithBinaryTree(DynamicArray<BinaryTree<int, int>> *intArr,
     }
 }
 
-void OutputBinaryTree(DynamicArray<BinaryTree<int, int>> *intArr,
-                      DynamicArray<BinaryTree<float, float>> *floatArr,
-                      DynamicArray<BinaryTree<complex<int>, int>> *complexArr) {
+void OutputBinaryTree(DynamicArray<BinaryTree<int, int>>* intArr,
+                      DynamicArray<BinaryTree<float, float>>* floatArr,
+                      DynamicArray<BinaryTree<complex<int>, int>>* complexArr) {
     int type = chooseTypeBinaryTree();
 
 

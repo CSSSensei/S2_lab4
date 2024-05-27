@@ -1,3 +1,9 @@
+//                  /\_/\
+//             ____/ o o \
+//          /~____  =ø= /
+//         (______)__m_m)
+
+
 #ifndef LABORATORY_WORK_4_HEAPARRAY_H
 #define LABORATORY_WORK_4_HEAPARRAY_H
 
@@ -10,7 +16,7 @@ template<class T>
 class HeapArray : BinaryHeap<T> {
 private:
     int SIZE = 100;
-    T *heap;
+    T* heap;
     int HeapSize;
 
     int IsParent(int parent, int child) {
@@ -33,7 +39,14 @@ private:
     }
 
     bool CompareComplexByMagnitude(const T &a, const T &b) {
-        return std::norm(a) >= std::norm(b);
+        if constexpr (std::is_arithmetic<T>::value) {
+            return a >= b; // Простое сравнение для целых и вещественных чисел
+        } else if constexpr (std::is_same<T, std::complex<typename T::value_type>>::value) {
+            return std::norm(a) >= std::norm(b); // Сравнение по норме для комплексных чисел
+        } else {
+            // Обработка других типов по необходимости
+            return false; // По умолчанию возвращаем false
+        }
     }
 
 public:
@@ -53,7 +66,6 @@ public:
             SIZE += 100;
         }
     }
-
 
     void AddElement(T item) {
         Resize();
@@ -163,7 +175,7 @@ public:
         }
     }
 
-    HeapArray<T> *GetTree(T searched) {
+    HeapArray<T>* GetTree(T searched) {
         int k = -1;
         for (int i = 0; i < HeapSize; i++) {
             if (heap[i] == searched) {
@@ -173,7 +185,7 @@ public:
         }//в k будет находиться индекс искомого элемента
 
         if (k != -1) {
-            auto *newHeaparr1 = new T[HeapSize];
+            auto* newHeaparr1 = new T[HeapSize];
             int newHeap1size = 1;
             newHeaparr1[0] = searched;
             for (int i = k + 1; i < HeapSize; i++) {
@@ -183,12 +195,12 @@ public:
                 }
             }
 
-            T *newHeaparr = new T[newHeap1size];
+            T* newHeaparr = new T[newHeap1size];
             for (int i = 0; i < newHeap1size; i++) {
                 newHeaparr[i] = newHeaparr1[i];
             }
 
-            auto *newheap = new HeapArray<T>;
+            auto* newheap = new HeapArray<T>;
             newheap->heap = newHeaparr;
             newheap->HeapSize = newHeap1size;
             newheap->SIZE = SIZE;
@@ -245,6 +257,7 @@ public:
 
         return parents;
     }
+
     void PrintHeapVisual(HeapArray<T> heap_local, int index = 0, const std::string &prefix = "", bool isLeft = true){
         if (index < heap_local.GetHeapSize()){
             std::string newPrefix = prefix + (isLeft ? "|    " : "     ");

@@ -50,29 +50,29 @@ int chooseTypeHeapArray();
 int chooseFunctionHeapArray();
 
 template<class T>
-void inputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr);
-void inputComplexArrayTyped(DynamicArray<HeapArray<complex<int>>> *Arr);
+void inputHeapArrayTyped(DynamicArray<HeapArray<T>>* Arr);
+void inputComplexArrayTyped(DynamicArray<HeapArray<complex<int>>>* Arr);
 
 template<class T>
-void functionHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr);
-void functionComplex(DynamicArray<HeapArray<complex<int>>> *Arr);
+void functionHeapArrayTyped(DynamicArray<HeapArray<T>>* Arr);
+void functionComplex(DynamicArray<HeapArray<complex<int>>>* Arr);
 
 template<class T>
-void outputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr);
+void outputHeapArrayTyped(DynamicArray<HeapArray<T>>* Arr);
 
 void MenuHeapArray();
 
-void InputAndSaveHeapArray(DynamicArray<HeapArray<int>> *intArr,
-                           DynamicArray<HeapArray<float>> *floatArr,
-                           DynamicArray<HeapArray<complex<int>>> *complexArr);
+void InputAndSaveHeapArray(DynamicArray<HeapArray<int>>* intArr,
+                           DynamicArray<HeapArray<float>>* floatArr,
+                           DynamicArray<HeapArray<complex<int>>>* complexArr);
 
-void FunctionWithHeapArray(DynamicArray<HeapArray<int>> *intArr,
-                           DynamicArray<HeapArray<float>> *floatArr,
-                           DynamicArray<HeapArray<complex<int>>> *complexArr);
+void FunctionWithHeapArray(DynamicArray<HeapArray<int>>* intArr,
+                           DynamicArray<HeapArray<float>>* floatArr,
+                           DynamicArray<HeapArray<complex<int>>>* complexArr);
 
-void OutputHeapArray(DynamicArray<HeapArray<int>> *intArr,
-                     DynamicArray<HeapArray<float>> *floatArr,
-                     DynamicArray<HeapArray<complex<int>>> *complexArr);
+void OutputHeapArray(DynamicArray<HeapArray<int>>* intArr,
+                     DynamicArray<HeapArray<float>>* floatArr,
+                     DynamicArray<HeapArray<complex<int>>>* complexArr);
 
 template<class T>
 void PrintHeapArrayMassive(HeapArray<T> heap);

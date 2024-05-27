@@ -11,39 +11,30 @@ int chooseTypeBinaryTree();
 int chooseFunctionBinaryTree();
 
 template<class T, class K>
-void inputBinaryTreeTyped(DynamicArray<BinaryTree<T, K>> *Arr);
-void inputComplexBinaryTreeTyped(DynamicArray<BinaryTree<complex<int>, int>> *Arr);
+void inputBinaryTreeTyped(DynamicArray<BinaryTree<T, K>>* Arr);
+void inputComplexBinaryTreeTyped(DynamicArray<BinaryTree<complex<int>, int>>* Arr);
 
 template<class T, class K>
-void functionBinaryTreeTyped(DynamicArray<BinaryTree<T, K>> *Arr);
+void functionBinaryTreeTyped(DynamicArray<BinaryTree<T, K>>* Arr);
 
 template<class T, class K>
-void outputBinaryTreeTyped(DynamicArray<BinaryTree<T, K>> * Arr);
+void outputBinaryTreeTyped(DynamicArray<BinaryTree<T, K>>*  Arr);
 
-void InputAndSaveBinaryTree(DynamicArray<BinaryTree<int, int>> *intArr,
-                            DynamicArray<BinaryTree<float, float>> *floatArr,
-                            DynamicArray<BinaryTree<complex<int>, int>> *complexArr);
+void InputAndSaveBinaryTree(DynamicArray<BinaryTree<int, int>>* intArr,
+                            DynamicArray<BinaryTree<float, float>>* floatArr,
+                            DynamicArray<BinaryTree<complex<int>, int>>* complexArr);
 void MenuBinaryTree();
 
-void FunctionWithBinaryTree(DynamicArray<BinaryTree<int, int>> *intArr,
-                            DynamicArray<BinaryTree<float, float>> *floatArr,
-                            DynamicArray<BinaryTree<complex<int>, int>> *complexArr);
+void FunctionWithBinaryTree(DynamicArray<BinaryTree<int, int>>* intArr,
+                            DynamicArray<BinaryTree<float, float>>* floatArr,
+                            DynamicArray<BinaryTree<complex<int>, int>>* complexArr);
 
-void OutputBinaryTree(DynamicArray<BinaryTree<int, int>> *intArr,
-                      DynamicArray<BinaryTree<float, float>> *floatArr,
-                      DynamicArray<BinaryTree<complex<int>, int>> *complexArr);
+void OutputBinaryTree(DynamicArray<BinaryTree<int, int>>* intArr,
+                      DynamicArray<BinaryTree<float, float>>* floatArr,
+                      DynamicArray<BinaryTree<complex<int>, int>>* complexArr);
 
 template<class T, class K>
 void PrintBinaryTreeMassive(BinaryTree<T, K> tree){
-//    auto root = tree.GetRoot();
-//    if (root == nullptr)
-//        return;
-//
-//    wcout << L"[Ключ: " << root->info.key << L" Значение: " << root->info.item << "]";
-//    BinaryTree<T, K> treeLeft (root->left);
-//    BinaryTree<T, K> treeRight (root->right);
-//    PrintBinaryTreeMassive(treeLeft);
-//    PrintBinaryTreeMassive(treeRight);
     std::wcout << L"КЛП: ";
     tree.Traversal_KLP_0();
     std::wcout << L"\nКПЛ: ";

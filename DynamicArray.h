@@ -4,7 +4,7 @@
 template <class T>
 class DynamicArray {
 private:
-    T *array;
+    T* array;
     int size;
     int filled;
 public:
@@ -60,17 +60,17 @@ public:
     void Resize(int newSize) {
         if (newSize < 0) { throw IndexOutOfRange(); }
 
-        if (newSize == 0) {
+        if (newSize == 0) { // удаление массива
             delete[] array;
             array = nullptr;
             size = 0;
             return;
-        }// удаление массива
+        }
 
-        if (newSize == size){return;}// длина не изменится
+        if (newSize == size){return;} // длина не изменится
 
-        if (newSize < size){
-            T *new_array = new T[newSize];
+        if (newSize < size){ // укорачивание массива
+            T* new_array = new T[newSize];
             for (int i = 0; i < newSize; i++){
                 new_array[i] = array[i];
             }
@@ -79,17 +79,17 @@ public:
             if (filled > newSize){filled = newSize;}
             array = new_array;
             return;
-        }// укорачивание массива
+        }
 
-        if (newSize > 0 && size == 0){
-            T *new_array = new T[newSize];
+        if (newSize > 0 && size == 0){ //увеличение размера массива и длины
+            T* new_array = new T[newSize];
             delete[] array;
             size = newSize;
             array = new_array;
-        }//увеличение размера массива 0 длины
+        }
 
-        if (newSize > size){
-            T *new_array = new T[newSize];
+        if (newSize > size){ // увеличение длины
+            T* new_array = new T[newSize];
             for (int i = 0; i < filled; i++){
                 new_array[i] = array[i];
             }
@@ -97,8 +97,9 @@ public:
             size = newSize;
             array = new_array;
             return;
-        }// увеличение длины
+        }
     };
+
     int GetSize(){
         return size;
     }

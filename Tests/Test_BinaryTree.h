@@ -22,7 +22,6 @@ double measureInsertionTime(BinaryTree<T, T> &tree, const vector<T> &elements) {
     for (const auto &element: elements) {
         tree.AddNode(element, element);
     }
-    //tree.PrintTreeVisual(tree.GetRoot());
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double> insertTime = end - start;
 

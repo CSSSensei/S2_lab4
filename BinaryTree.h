@@ -1,3 +1,13 @@
+//            _   ___ __         __           __
+//           / | / (_) /______  / /__  ____  / /______
+//          /  |/ / / //_/ __ \/ / _ \/ __ \/ //_/ __ \
+//         / /|  / / ,< / /_/ / /  __/ / / / ,< / /_/ /
+//        /_/ |_/_/_/|_|\____/_/\___/_/ /_/_/|_|\____/
+//           __ _  ___ ___  / /  (_)   (_)___(_)__
+//          /  ' \/ -_) _ \/ _ \/ /   / / __/ (_-<
+//         /_/_/_/\__/ .__/_//_/_/   /_/\__/_/___/
+//                  /_/
+
 #ifndef LABORATORY_WORK_4_BINARYTREE_H
 #define LABORATORY_WORK_4_BINARYTREE_H
 
@@ -14,11 +24,12 @@ private:
         K key;
         T item;
     } Info;
+
     typedef struct Node {
         Info info;
         int height;
-        Node *left;
-        Node *right;
+        Node* left;
+        Node* right;
     } Node;
 
     Info &operator=(Info inf) {
@@ -28,8 +39,8 @@ private:
         return Demo;
     }
 
-    Info *&operator=(Info *inf) {
-        Info *Demo;
+    Info* &operator=(Info* inf) {
+        Info* Demo;
         Demo->key = inf->key;
         Demo->item = inf->item;
         return Demo;
@@ -43,8 +54,8 @@ private:
         return Demo;
     }
 
-    Node *&operator=(Node *nde) {
-        Node *Demo;
+    Node* &operator=(Node* nde) {
+        Node* Demo;
         Demo->info = nde->info;
         Demo->right = nde->right;
         Demo->left = nde->left;
@@ -53,7 +64,7 @@ private:
 
     Node* root;
 
-    void DeleteElementFirst(Node *temp, Node *temparent) {
+    void DeleteElementFirst(Node* temp, Node* temparent) {
         if (temp == temparent->left)
             temparent->left = nullptr;
         else
@@ -62,7 +73,7 @@ private:
         delete temp;
     }
 
-    void DeleteElementSecond(Node *temp, Node *temparent) {
+    void DeleteElementSecond(Node* temp, Node* temparent) {
         Node* tempchild = nullptr;
         if (temp->left == nullptr)
             tempchild = temp->right;
@@ -132,7 +143,7 @@ public:
         root = nullptr;
     }
 
-    explicit BinaryTree(Node *newroot) {
+    explicit BinaryTree(Node* newroot) {
         root = newroot;
     }
     void CreateTreeFromArray(const std::vector<std::pair<K, T>>& elements) {
@@ -246,15 +257,15 @@ public:
         PrintTreeVisual(root_local->right, prefix_local + (isLeft ? "|    " : "     "), false);
     }
 
-    Node *GetRoot() {
+    Node* GetRoot() {
         return root;
     }
 
-    T* SearchElement(K key) {
+    T* SearchElement(K key) { //Поиск элемента по ключу
         Node* temp = new Node;
         Node* search = nullptr;
         temp = root;
-        T *tmp = new T;
+        T* tmp = new T;
         while (temp != nullptr && search == nullptr) {
             if (key < temp->info.key)
                 temp = temp->left;
@@ -269,8 +280,9 @@ public:
             return tmp;
         } else
             throw WrongKey();
-    }//Поиск элемента по ключу
-    bool ContainElement(K key) {
+    }
+
+    bool ContainElement(K key) { //Вхождение элемента
         Node* temp = new Node;
         Node* search = nullptr;
         temp = root;
@@ -287,8 +299,9 @@ public:
             return true;
         else
             return false;
-    }//Вхождение элемента
-    void DeleteElement(K key) {
+    }
+
+    void DeleteElement(K key) { //Удаляет узел с этим ключом
         Node* temp = new Node;
         Node* search = nullptr;
         Node* temparent = nullptr;
@@ -315,9 +328,9 @@ public:
             else if (temp->left != nullptr && temp->right != nullptr)
                 DeleteElementThird(temp);
         }
-    }//Удаляет узел с этим ключом
+    }
 
-    BinaryTree<T, K> GetTree(K key) {
+    BinaryTree<T, K> GetTree(K key) { //возвращает поддерево по ключу
         Node* temp = new Node;
         Node* search = nullptr;
         temp = root;
@@ -335,14 +348,15 @@ public:
             return newtree;
         } else
             throw WrongKey();
-    }//возвращает поддерево по ключу
+    }
 
-    DynamicArray<Info>& RoundTree() {
+    DynamicArray<Info>& RoundTree() { //возвращает массив с обходом
         auto* arr = new DynamicArray<Info>;
         RoundTree(root, arr);
         return *arr;
-    }//возвращает массив с обходом
-    int isTree(const BinaryTree<T, K> &tree) {
+    }
+
+    int isTree(const BinaryTree<T, K> &tree) { //Сравнивает дерево
         if (root == tree.root)
             return 1;
 
@@ -359,8 +373,9 @@ public:
             return 0;
 
         return 1;
-    }//Сравнивает дерево
-    int ContainTree(const BinaryTree<T, K> &tree) {
+    }
+
+    int ContainTree(const BinaryTree<T, K> &tree) { //проверяет дерево на вхождение
         if (tree.root == nullptr)
             return 1;
 
@@ -379,20 +394,17 @@ public:
         } else {
             return BinaryTree<T, K>(root->right).ContainTree(tree);
         }
-    }//проверяет дерево на вхождение
-
+    }
 
     void Balancing() {
         std::wcout << L"Топ-10 бесполезных функций в АВЛ-дереве" << std::endl;
     }
-
 
     BinaryTree<T, K> map(T(*func)(T)) {
         BinaryTree<T, K> newTree;
         mapHelper(this->root, func, newTree);
         return newTree;
     }
-
 
     void mapHelper(Node* root_local, T(*func)(T), BinaryTree<T, K>& newTree) {
         if (root_local == nullptr) {

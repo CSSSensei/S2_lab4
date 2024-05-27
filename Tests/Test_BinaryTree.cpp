@@ -58,7 +58,6 @@ void testContainElement() {
 }
 
 void testGetTree() {
-    // Create a new BinaryTree object and add some nodes for testing
     BinaryTree<int, int> binaryTree;
     binaryTree.AddNode(5, 50);
     binaryTree.AddNode(3, 30);
@@ -66,7 +65,7 @@ void testGetTree() {
     binaryTree.AddNode(2, 20);
     binaryTree.AddNode(6, 60);
 
-    // Testing when the key to search is present in the tree
+    // Проверка наличия ключа для поиска в дереве
     BinaryTree<int, int> resultTree1 = binaryTree.GetTree(3);
     assert(resultTree1.ContainElement(3) == true);
     assert(resultTree1.ContainElement(5) == false);
@@ -97,20 +96,13 @@ void testIsTree() {
     binaryTree3.AddNode(3, 30);
     binaryTree3.AddNode(8, 80);
 
-    // Testing when comparing the same trees should return 1
     assert(binaryTree1.isTree(binaryTree1) == 1);
-
-    // Testing when comparing two identical trees should return 1
     assert(binaryTree1.isTree(binaryTree3) == 1);
-
-    // Testing when comparing two different trees should return 0
     assert(binaryTree1.isTree(binaryTree2) == 0);
 
-    // Testing when comparing an empty tree with a non-empty tree should return 0
     BinaryTree<int, int> emptyTree;
     assert(binaryTree1.isTree(emptyTree) == 0);
 
-    // Testing when comparing two empty trees should return 1
     assert(emptyTree.isTree(emptyTree) == 1);
     binaryTree1.DeleteBinaryTree();
     binaryTree2.DeleteBinaryTree();
@@ -138,17 +130,13 @@ void testContainTree() {
     binaryTree4.AddNode(8, 30);
     binaryTree4.AddNode(4, 80);
     binaryTree4.AddNode(100, 1);
-    // Testing when checking a tree containing itself should return 1
+
     assert(binaryTree1.ContainTree(binaryTree1) == 1);
-
-    // Testing when checking a tree contained in another tree should return 0
     assert(binaryTree1.ContainTree(binaryTree2) == 0);
-
-    // Testing when checking a tree not contained in another tree should return 0
     assert(binaryTree1.ContainTree(binaryTree3) == 0);
     assert(binaryTree4.ContainTree(binaryTree3) == 1);
 
-    // Testing when checking an empty tree should return 1
+
     BinaryTree<int, int> emptyTree;
     assert(emptyTree.ContainTree(binaryTree1) == 0);
     binaryTree1.DeleteBinaryTree();
@@ -164,28 +152,26 @@ void testMapFunction() {
     binaryTree.AddNode(3, 6);
     binaryTree.AddNode(7, 14);
 
-    // Lambda function to square the item value
+    // Лямбда-функция для возведения значения элемента в квадрат
     auto squareMapper = [](int value) {
         return value * value;
     };
 
-    // Calling the map function with the squareMapper lambda
+    // Вызов функции map с помощью лямбды square Mapper
     BinaryTree<int, int> squaredTree = binaryTree.map(squareMapper);
 
-    // Asserting the mapped values are correct
     assert(*squaredTree.SearchElement(5) == 100);
     assert(*squaredTree.SearchElement(3) == 36);
     assert(*squaredTree.SearchElement(7) == 196);
 
-    // Lambda function to add 5 to the item value
+    // Лямбда-функция для добавления 5 к значению элемента
     auto addFiveMapper = [](int value) {
         return value + 5;
     };
 
-    // Calling the map function with the addFiveMapper lambda
+    // Вызов функции map с помощью лямбды addFiveMapper
     BinaryTree<int, int> modifiedTree = binaryTree.map(addFiveMapper);
 
-    // Asserting the modified values are correct
     assert(*modifiedTree.SearchElement(5) == 15);
     assert(*modifiedTree.SearchElement(3) == 11);
     assert(*modifiedTree.SearchElement(7) == 19);
@@ -196,18 +182,16 @@ void testMapFunction() {
 }
 
 void testWhereFunction() {
-    // Creating a BinaryTree and adding some nodes
     BinaryTree<int, int> binaryTree;
     binaryTree.AddNode(5, 10);
     binaryTree.AddNode(3, 6);
     binaryTree.AddNode(7, 15);
     binaryTree.AddNode(8, 3);
 
-    // Testing where function with lambda functions as predicates
+    // Тестирование функции where с лямбда-функциями
     BinaryTree<int, int> evenNumbersTree = binaryTree.where([](int num) { return num % 2 == 0; });
     BinaryTree<int, int> greaterThanTenTree = binaryTree.where([](int num) { return num >= 10; });
 
-    // Asserting the values in the new trees are as expected
     assert(*evenNumbersTree.SearchElement(5) == 10);
     assert(*evenNumbersTree.SearchElement(3) == 6);
     try { evenNumbersTree.SearchElement(7); }
@@ -232,7 +216,6 @@ void testWhereFunction() {
     binaryTree.DeleteBinaryTree();
     evenNumbersTree.DeleteBinaryTree();
     greaterThanTenTree.DeleteBinaryTree();
-    // 8 -> 3 (not greater than 10)
 
 }
 

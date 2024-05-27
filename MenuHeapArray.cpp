@@ -59,8 +59,9 @@ int chooseFunctionHeapArray() {
     return func;
 }
 
+
 template<class T>
-void inputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr) {
+void inputHeapArrayTyped(DynamicArray<HeapArray<T>>* Arr) {
     HeapArray<T> addingHeap;
 
     wcout << L"Введите колличество узлов в куче" << endl;
@@ -78,8 +79,7 @@ void inputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr) {
     Arr->Append(addingHeap);
 }
 
-
-void inputComplexArrayTyped(DynamicArray<HeapArray<complex<int>>> *Arr) {
+void inputComplexArrayTyped(DynamicArray<HeapArray<complex<int>>>* Arr) {
     HeapArray<complex<int>> addingHeap;
 
     wcout << L"Введите колличество узлов в куче" << endl;
@@ -97,8 +97,9 @@ void inputComplexArrayTyped(DynamicArray<HeapArray<complex<int>>> *Arr) {
     Arr->Append(addingHeap);
 }
 
+
 template<class T>
-void functionHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr) {
+void functionHeapArrayTyped(DynamicArray<HeapArray<T>>* Arr) {
     int function = chooseFunctionHeapArray();
     int amountOfHeapArray = Arr->GetFilled(), indexOfHeap1 = -1, indexOfHeap2 = -1;
 
@@ -141,13 +142,20 @@ void functionHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr) {
         case 2:
             wcout << L"Введите индекс узла кучи, по которому хотите искать:" << endl;
             key = getNumberInput<int>();
+            if (key < 0 || key >= Arr->GetElement(indexOfHeap1).GetHeapSize()){
+                wcout << L"Неправильный индекс. В куче находится " << Arr->GetElement(indexOfHeap1).GetHeapSize() << L" элемента(-ов)" << endl;
+                break;
+            }
             item = Arr->GetElement(indexOfHeap1).FindElement(key);
             wcout << L"В узле с таким индексом лежит - \"" << item << L"\"" << endl;
             break;
         case 3:
             wcout << L"Введите индекс узла кучи, который хотите удалить:" << endl;
             key = getNumberInput<int>();
-
+            if (key < 0 || key >= Arr->GetElement(indexOfHeap1).GetHeapSize()){
+                wcout << L"Неправильный индекс. В куче находится " << Arr->GetElement(indexOfHeap1).GetHeapSize() << L" элемента(-ов)" << endl;
+                break;
+            }
             newheap = Arr->GetElement(indexOfHeap1);
             newheap.DeleteElementByKey(key);
             Arr->Append(newheap);
@@ -196,8 +204,7 @@ void functionHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr) {
     }
 }
 
-
-void functionComplex(DynamicArray<HeapArray<complex<int>>> *Arr) {
+void functionComplex(DynamicArray<HeapArray<complex<int>>>* Arr) {
     int function = chooseFunctionHeapArray();
     int amountOfHeapArray = Arr->GetFilled(), indexOfHeap1 = -1, indexOfHeap2 = -1;
 
@@ -226,7 +233,6 @@ void functionComplex(DynamicArray<HeapArray<complex<int>>> *Arr) {
     bool flag;
     complex<int> item;
     HeapArray<complex<int>> newheap, newheap2;
-
 
     switch (function) {
         case 1:
@@ -298,7 +304,7 @@ void functionComplex(DynamicArray<HeapArray<complex<int>>> *Arr) {
 
 
 template<class T>
-void outputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr) {
+void outputHeapArrayTyped(DynamicArray<HeapArray<T>>* Arr) {
     int amountOfHeapArray = Arr->GetFilled();
     int index, variant;
     wcout << L"В памяти находится \"" << amountOfHeapArray << L"\" куч" << endl;
@@ -328,10 +334,9 @@ void outputHeapArrayTyped(DynamicArray<HeapArray<T>> *Arr) {
 
 
 void MenuHeapArray() {
-    auto *intArr = new DynamicArray<HeapArray<int>>;
-    auto *floatArr = new DynamicArray<HeapArray<float>>;
-    auto *complexArr = new DynamicArray<HeapArray<complex<int>>>;
-
+    auto* intArr = new DynamicArray<HeapArray<int>>;
+    auto* floatArr = new DynamicArray<HeapArray<float>>;
+    auto* complexArr = new DynamicArray<HeapArray<complex<int>>>;
 
     int operation;
     while (true) {
@@ -362,9 +367,9 @@ void MenuHeapArray() {
     }
 }
 
-void InputAndSaveHeapArray(DynamicArray<HeapArray<int>> *intArr,
-                           DynamicArray<HeapArray<float>> *floatArr,
-                           DynamicArray<HeapArray<complex<int>>> *complexArr) {
+void InputAndSaveHeapArray(DynamicArray<HeapArray<int>>* intArr,
+                           DynamicArray<HeapArray<float>>* floatArr,
+                           DynamicArray<HeapArray<complex<int>>>* complexArr) {
     int type = chooseTypeHeapArray();
 
     switch (type) {
@@ -382,9 +387,9 @@ void InputAndSaveHeapArray(DynamicArray<HeapArray<int>> *intArr,
     }
 }
 
-void FunctionWithHeapArray(DynamicArray<HeapArray<int>> *intArr,
-                           DynamicArray<HeapArray<float>> *floatArr,
-                           DynamicArray<HeapArray<complex<int>>> *complexArr) {
+void FunctionWithHeapArray(DynamicArray<HeapArray<int>>* intArr,
+                           DynamicArray<HeapArray<float>>* floatArr,
+                           DynamicArray<HeapArray<complex<int>>>* complexArr) {
     int type = chooseTypeHeapArray();
 
     switch (type) {
@@ -402,11 +407,10 @@ void FunctionWithHeapArray(DynamicArray<HeapArray<int>> *intArr,
     }
 }
 
-void OutputHeapArray(DynamicArray<HeapArray<int>> *intArr,
-                     DynamicArray<HeapArray<float>> *floatArr,
-                     DynamicArray<HeapArray<complex<int>>> *complexArr) {
+void OutputHeapArray(DynamicArray<HeapArray<int>>* intArr,
+                     DynamicArray<HeapArray<float>>* floatArr,
+                     DynamicArray<HeapArray<complex<int>>>* complexArr) {
     int type = chooseTypeHeapArray();
-
 
     switch (type) {
         case 1:
@@ -423,14 +427,15 @@ void OutputHeapArray(DynamicArray<HeapArray<int>> *intArr,
     }
 }
 
+
 template<class T>
 void PrintHeapArrayMassive(HeapArray<T> heap) {
     for (int i = 0; i < heap.GetHeapSize(); i++) {
         cout << heap.FindElement(i) << "  ";
     }
-
     cout << endl;
 }
+
 
 template<class T>
 void PrintHeapArrayBeauty(HeapArray<T> heap) {

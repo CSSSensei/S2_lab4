@@ -35,7 +35,7 @@ void testGetTreeHeapArray() {
     heap.AddElement(5);
     heap.AddElement(15);
 
-    HeapArray<int> *newHeap = heap.GetTree(5);
+    HeapArray<int>* newHeap = heap.GetTree(5);
     // Проверяем наличие элементов в созданной куче
     assert(newHeap->SearchElement(5));
     assert(newHeap->SearchElement(10) == false);
