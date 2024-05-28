@@ -44,14 +44,13 @@ public:
 
     //Операции
     void Append(T item) {
+        if (size == 0) {
+            Resize(10);
+        }
         if (filled < 0 || filled > size) {
-            filled = 0;
-            size = 0;
+            Resize(size * 2);
         }
 
-        if (filled == size) {
-            Resize(100);
-        }
 
         array[filled] = item;
         filled += 1;
@@ -64,20 +63,23 @@ public:
             delete[] array;
             array = nullptr;
             size = 0;
+            filled = 0;
             return;
         }
 
         if (newSize == size){return;} // длина не изменится
 
         if (newSize < size){ // укорачивание массива
-            T* new_array = new T[newSize];
-            for (int i = 0; i < newSize; i++){
-                new_array[i] = array[i];
-            }
-            delete[] array;
-            size = newSize;
             if (filled > newSize){filled = newSize;}
-            array = new_array;
+            if (newSize * 4 < size && size > 100) {
+                size = newSize * 2;
+                T *new_array = new T[size];
+                for (int i = 0; i < filled; i++) {
+                    new_array[i] = array[i];
+                }
+                delete[] array;
+                array = new_array;
+            }
             return;
         }
 

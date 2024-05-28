@@ -20,12 +20,22 @@ void testAddElementAndSearchHeapArray() {
 // Тест для функции удаления элемента
 void testDeleteElementHeapArray() {
     HeapArray<int> heap;
-    heap.AddElement(10);
+    heap.AddElement(123456);
     heap.AddElement(5);
     assert(heap.SearchElement(5));
     heap.DeleteElement(5);
     assert(heap.GetHeapSize() == 1);
     assert(!heap.SearchElement(5));
+    for (int i = 0; i < 10000; i++){
+        heap.AddElement(i);
+    }
+    assert(heap.GetHeapSize() == 10001);
+    for (int i = 0; i < 10000; i++){
+        assert(heap.SearchElement(i));
+        heap.DeleteElement(i);
+        assert(!heap.SearchElement(i));
+    }
+
 }
 
 // Тест для функции поиска элемента и создания новой кучи

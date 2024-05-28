@@ -61,14 +61,29 @@ public:
         heap = new T[SIZE];
     }
 
-    void Resize() {
-        if (HeapSize == SIZE) {
+    void Resize(int newSize) {
+        if (newSize > SIZE) {
             SIZE += 100;
+            T* new_array = new T[SIZE];
+            for (int i = 0; i < HeapSize; i++){
+                new_array[i] = heap[i];
+            }
+            delete[] heap;
+            heap = new_array;
+        }
+        else if (newSize * 4 <= SIZE && newSize > 100){
+            SIZE = newSize * 2;
+            T* new_array = new T[SIZE];
+            for (int i = 0; i < HeapSize; i++){
+                new_array[i] = heap[i];
+            }
+            delete[] heap;
+            heap = new_array;
         }
     }
 
     void AddElement(T item) {
-        Resize();
+        Resize(HeapSize + 1);
         int i, parent;
         i = HeapSize;
         parent = (i - 1) / 2;
@@ -138,8 +153,8 @@ public:
         for (int i = key; i < HeapSize - 1; i++) {
             heap[i] = heap[i + 1];
         }
-        //delete heap[HeapSize - 1];
-        HeapSize--;
+
+        Resize(--HeapSize);
 
         for (int j = 0; j < GetLevels(); j++) {
             for (int k = 0; k < HeapSize; k++) {
@@ -154,20 +169,21 @@ public:
         }
         auto toDelete = new bool[HeapSize];
         for (int i = 0; i < HeapSize; ++i) {
-            if (heap[i] == value) {
+            if (heap[i] == value)
                 toDelete[i] = true;
-            }
-            toDelete[i] = false;
+            else
+                toDelete[i] = false;
         }
         int j = 0;
-        for (int i = 0; i < HeapSize; ++i) {
+        for (int i = 0; i < HeapSize; i++) {
             if (!toDelete[i]) {
                 heap[j] = heap[i];
                 j++;
             }
         }
 
-        HeapSize--;
+        Resize(--HeapSize);
+
         delete[] toDelete;
 
         for (int i = 0; i < HeapSize; ++i) {

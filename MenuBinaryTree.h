@@ -36,17 +36,17 @@ void OutputBinaryTree(DynamicArray<BinaryTree<int, int>>* intArr,
 template<class T, class K>
 void PrintBinaryTreeMassive(BinaryTree<T, K> tree){
     std::wcout << L"КЛП: ";
-    tree.Traversal_KLP_0();
+    tree.PreOrder_Traversal();
     std::wcout << L"\nКПЛ: ";
-    tree.Traversal_KPL_0();
+    tree.ReversePreorder_Traversal();
     std::wcout << L"\nЛКП: ";
-    tree.Traversal_LKP_0();
+    tree.InOrder_Traversal();
     std::wcout << L"\nЛПК: ";
-    tree.Traversal_LPK_0();
+    tree.PostOrder_Traversal();
     std::wcout << L"\nПКЛ: ";
-    tree.Traversal_PKL_0();
+    tree.ReverseInOrder_Traversal();
     std::wcout << L"\nПЛК: ";
-    tree.Traversal_PLK_0();
+    tree.ReversePostOrder_Traversal();
 
 }
 
@@ -55,7 +55,6 @@ void PrintBinaryTreeBeauty(BinaryTree<T, K> tree) {
     auto root = tree.GetRoot(); // Получаем указатель на корневой узел
     tree.PrintTreeVisual(root);
 }
-
 
 
 template<class T>

@@ -250,11 +250,11 @@ public:
         }
 
         std::cout << prefix_local;
-        std::wcout << (isLeft ? L"├── " : L"└── ");
+        std::wcout << (isLeft ? L"└── " : L"├── ");
         std::cout << "[" << root_local->info.key << "]: " << root_local->info.item << std::endl;
 
-        PrintTreeVisual(root_local->left, prefix_local + (isLeft ? "|    " : "     "), true);
         PrintTreeVisual(root_local->right, prefix_local + (isLeft ? "|    " : "     "), false);
+        PrintTreeVisual(root_local->left, prefix_local + (isLeft ? "|    " : "     "), true);
     }
 
     Node* GetRoot() {
@@ -449,75 +449,75 @@ public:
         return mergedTree;
     }
 
-    void Traversal_KLP_0(){
-        Traversal_KLP_Tree_0(root);
+    void PreOrder_Traversal() {
+        Preorder_NLR(root);
     }
 
-    void Traversal_KLP_Tree_0(Node* tree){
+    void Preorder_NLR(Node* tree) {
         if (tree != nullptr) {
             std::cout << "[" << tree->info.key << "]: " << tree->info.item << ", "; // Корень
-            Traversal_KLP_Tree_0(tree->left); // Лево
-            Traversal_KLP_Tree_0(tree->right); // Право
+            Preorder_NLR(tree->left); // Лево
+            Preorder_NLR(tree->right); // Право
         }
     }
 
-    void Traversal_KPL_0(){
-        Traversal_KPL_Tree_0(root);
+    void ReversePreorder_Traversal() {
+        ReversePreorder_NRL(root);
     }
 
-    void Traversal_KPL_Tree_0(Node* tree){
+    void ReversePreorder_NRL(Node* tree) {
         if (tree != nullptr) {
             std::cout << "[" << tree->info.key << "]: " << tree->info.item << ", "; // Корень
-            Traversal_KPL_Tree_0(tree->right); // Право
-            Traversal_KPL_Tree_0(tree->left); // Лево
+            ReversePreorder_NRL(tree->right); // Право
+            ReversePreorder_NRL(tree->left); // Лево
         }
     }
 
-    void Traversal_LPK_0(){
-        Traversal_LPK_Tree_0(root);
+    void PostOrder_Traversal() {
+        PostOrder_LRN(root);
     }
 
-    void Traversal_LPK_Tree_0(Node* tree){
+    void PostOrder_LRN(Node* tree) {
         if (tree != nullptr) {
-            Traversal_LPK_Tree_0(tree->left); // Лево
-            Traversal_LPK_Tree_0(tree->right); // Право
+            PostOrder_LRN(tree->left); // Лево
+            PostOrder_LRN(tree->right); // Право
             std::cout << "[" << tree->info.key << "]: " << tree->info.item << ", "; // Корень
         }
     }
 
-    void Traversal_LKP_0(){
-        Traversal_LKP_Tree_0(root);
+    void ReversePostOrder_Traversal() {
+        ReversePostOrder_RLN(root);
     }
 
-    void Traversal_LKP_Tree_0(Node* tree){
+    void ReversePostOrder_RLN(Node* tree) {
         if (tree != nullptr) {
-            Traversal_LKP_Tree_0(tree->left); // Лево
+            ReversePostOrder_RLN(tree->right); // Право
+            ReversePostOrder_RLN(tree->left); // Лево
             std::cout << "[" << tree->info.key << "]: " << tree->info.item << ", "; // Корень
-            Traversal_LKP_Tree_0(tree->right); // Право
         }
     }
 
-    void Traversal_PLK_0(){
-        Traversal_PLK_Tree_0(root);
+    void InOrder_Traversal() {
+        InOrder_LNR(root);
     }
 
-    void Traversal_PLK_Tree_0(Node* tree){
+    void InOrder_LNR(Node* tree) {
         if (tree != nullptr) {
+            InOrder_LNR(tree->left); // Лево
             std::cout << "[" << tree->info.key << "]: " << tree->info.item << ", "; // Корень
-            Traversal_PLK_Tree_0(tree->left); // Лево
-            Traversal_PLK_Tree_0(tree->right); // Право
+            InOrder_LNR(tree->right); // Право
         }
     }
 
-    void Traversal_PKL_0(){
-        Traversal_PKL_Tree_0(root);
+    void ReverseInOrder_Traversal() {
+        ReverseInOrder_RNL(root);
     }
 
-    void Traversal_PKL_Tree_0(Node* tree){
+    void ReverseInOrder_RNL(Node* tree) {
         if (tree != nullptr) {
+            ReverseInOrder_RNL(tree->right); // Право
             std::cout << "[" << tree->info.key << "]: " << tree->info.item << ", "; // Корень
-            Traversal_PKL_Tree_0(tree->right); // Право
-            Traversal_PKL_Tree_0(tree->left); // Лево
+            ReverseInOrder_RNL(tree->left); // Лево
         }
     }
 
