@@ -146,6 +146,7 @@ public:
     explicit BinaryTree(Node* newroot) {
         root = newroot;
     }
+
     void CreateTreeFromArray(const std::vector<std::pair<K, T>>& elements) {
         for (const auto& element : elements) {
             AddNode(element.first, element.second);
@@ -231,6 +232,12 @@ public:
         return newRoot;
     }
 
+    /*             X (root_local)   |       Y (newRoot)
+                  / \               |      / \
+                 A   Y             ==>    X   C
+                    / \             |    / \
+                   B   C            |   A   B
+    */
     Node* rotateLeft(Node* root_local) {
         Node* newRoot = root_local->right;
         Node* temp = newRoot->left;
